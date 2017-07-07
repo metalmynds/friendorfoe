@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26621.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "WhoGoesThere", "WhoGoesThere\WhoGoesThere.njsproj", "{EFBB08F9-2E63-4A6A-85A4-1CEB74434947}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendOrFoe", "FriendOrFoe\FriendOrFoe.csproj", "{24AB66E3-FE3E-4D9D-BBF9-2BA297E789FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{EFBB08F9-2E63-4A6A-85A4-1CEB74434947}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBB08F9-2E63-4A6A-85A4-1CEB74434947}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFBB08F9-2E63-4A6A-85A4-1CEB74434947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24AB66E3-FE3E-4D9D-BBF9-2BA297E789FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24AB66E3-FE3E-4D9D-BBF9-2BA297E789FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24AB66E3-FE3E-4D9D-BBF9-2BA297E789FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24AB66E3-FE3E-4D9D-BBF9-2BA297E789FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0DCD53E-A884-4D3B-8E14-59817C961FED}
 	EndGlobalSection
 EndGlobal
