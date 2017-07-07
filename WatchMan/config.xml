@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="https://www.metalmynds.io/WatchMan" version="1.0.0" viewmodes="maximized">
+    <tizen:app-widget id="nP5yjYHgoG.WatchMan.WatchMan" primary="true">
+        <tizen:widget-label>Hello Web Widget!</tizen:widget-label>
+        <tizen:widget-content src="widget/WatchMan/index.html">
+            <tizen:widget-size preview="widget/WatchMan/preview.png">2x2</tizen:widget-size>
+        </tizen:widget-content>
+    </tizen:app-widget>
+    <tizen:application id="nP5yjYHgoG.WatchMan" package="nP5yjYHgoG" required_version="3.0"/>
+    <author href="www.metalmynds.io" email="crazeydave@metalmynds.io">Dave Paterson</author>
+    <content src="index.html"/>
+    <description>WatchMan is a Widget to Allow Friend or Foe to Send Alerts.</description>
+    <feature name="http://tizen.org/feature/screen.size.normal"/>
+    <icon src="icon.png"/>
+    <name>WatchMan</name>
+    <tizen:profile name="wearable"/>
+</widget>
