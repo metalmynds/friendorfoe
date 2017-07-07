@@ -20,4 +20,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview2-final" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FriendOrFoe.Model\FriendOrFoe.Model.csproj" />
+  </ItemGroup>
+
 </Project>
