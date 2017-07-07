@@ -347,3 +347,4 @@ typings/
 # dotenv environment variables file
 .env
 
+/WatchMan/.settings
