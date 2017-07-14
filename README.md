@@ -7,3 +7,4 @@ See This Link for Setup Instructions
 
 https://blogs.msdn.microsoft.com/webdev/2017/06/28/introducing-asp-net-core-2-0-preview-2/
 
+The project now depends on Preview 4 so ensure you upgrade (via the Flag in VS 2017).
