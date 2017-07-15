@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+using System.Net.WebSockets;
 
 namespace FriendOrFoe.Plugins.iSpy
 {
@@ -10,17 +13,25 @@ namespace FriendOrFoe.Plugins.iSpy
         //internal int LineWidth = 1;
         public string Alert;
 
+        private ClientWebSocket _whoGoesSocket;
+
+        public Main()
+        {
+            _whoGoesSocket = new ClientWebSocket();
+
+            
+        }
+
         public Bitmap ProcessFrame(Bitmap frame)
         {
-            //var g = Graphics.FromImage(frame);
-            //var p = new Pen(Color.Green) { Width = LineWidth };
-            //if (LineWidth == 2 && Alert != null)
-            //    p.Color = Color.Red;
-            //g.DrawLine(p, 0, 0, frame.Width, frame.Height);
 
-            //p.Dispose();
-            //g.Dispose();
-            //Alert = LineWidth == 2 ? "Line is 2px!" : "";
+            // Base64 Encode the Image
+
+            var encodedImage = Convert.ToBase64String(frame.ToByteArray(ImageFormat.Png));
+
+            // Send to WhoGoesThere via WebSocket
+
+
 
             return frame;
         }
@@ -46,13 +57,16 @@ namespace FriendOrFoe.Plugins.iSpy
 
         public string Configure()
         {
-            //var cfg = new Configure(this);
-            //if (cfg.ShowDialog() == DialogResult.OK)
-            //{
-            //    _config = LineWidth.ToString();
+            using (var cfg = new frmSetup(this))
+            {
 
-            //    InitConfig();
-            //}
+                if (cfg.ShowDialog() == DialogResult.OK)
+                {
+                    //_config = LineWidth.ToString();
+
+                    InitConfig();
+                }
+            }
             return Configuration;
         }
 

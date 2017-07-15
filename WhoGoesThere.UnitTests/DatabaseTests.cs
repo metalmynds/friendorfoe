@@ -9,7 +9,7 @@ namespace WhoGoesThere.UnitTests
         [TestMethod]
         public void CreateDB()
         {
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
         }
     }
 }
