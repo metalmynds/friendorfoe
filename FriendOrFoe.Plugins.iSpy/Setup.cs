@@ -52,10 +52,11 @@ namespace FriendOrFoe.Plugins.iSpy
 
             // Validate Url
 
+            var endPoint = txtEndPointAddress.Text;
+
             try
             {
 
-                var endPoint = txtEndPointAddress.Text;
 
                 var endPointUri = new Uri(endPoint);
 
@@ -79,7 +80,7 @@ namespace FriendOrFoe.Plugins.iSpy
             catch (Exception ex)
             {
 
-                errEndPoint.SetError(txtEndPointAddress, "The End Point is Not Valid!");
+                errEndPoint.SetError(txtEndPointAddress, $"The End Point Url Format is Not Valid!\nError: {ex.Message}");
 
                 return;
             }
