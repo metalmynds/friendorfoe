@@ -34,7 +34,7 @@ namespace FriendOrFoe.Plugins.iSpy
 
         private async System.Threading.Tasks.Task SendImagesAsync(Bitmap frame)
         {
-            Uri serverUri = new Uri("ws://localhost:49889/");
+            Uri serverUri = new Uri(EndPoint);
 
             if (_whoGoesSocket.State != WebSocketState.Open)
             {
