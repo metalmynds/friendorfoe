@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using WhoGoesThere.Data;
 using WhoGoesThere.Models;
 using WhoGoesThere.Services;
+using System.Net.WebSockets;
 
 namespace WhoGoesThere
 {
@@ -67,6 +68,42 @@ namespace WhoGoesThere
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseWebSockets();
+
+            var webSocketOptions = new WebSocketOptions()
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+                ReceiveBufferSize = 4 * 1024
+            };
+
+            app.UseWebSockets(webSocketOptions);
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path == "/input")
+                {
+                    if (context.WebSockets.IsWebSocketRequest)
+                    {
+                        WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                        await ProcessInput(context, webSocket);
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 400;
+                    }
+                }
+                else
+                {
+                    await next();
+                }
+
+            });
+        }
+
+        private Task ProcessInput(HttpContext context, WebSocket webSocket)
+        {
+            throw new NotImplementedException();
         }
     }
 }
