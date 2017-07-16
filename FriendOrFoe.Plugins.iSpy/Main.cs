@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Net.WebSockets;
+using System.Threading;
+using System.Text;
 
 namespace FriendOrFoe.Plugins.iSpy
 {
@@ -10,7 +12,7 @@ namespace FriendOrFoe.Plugins.iSpy
     {
         private string _config = "";
         private bool _disposed;
-        //internal int LineWidth = 1;
+        internal String EndPoint = "ws://localhost:21505/input";
         public string Alert;
 
         private ClientWebSocket _whoGoesSocket;
@@ -18,22 +20,30 @@ namespace FriendOrFoe.Plugins.iSpy
         public Main()
         {
             _whoGoesSocket = new ClientWebSocket();
-
-            
         }
 
         public Bitmap ProcessFrame(Bitmap frame)
         {
 
-            // Base64 Encode the Image
-
-            var encodedImage = Convert.ToBase64String(frame.ToByteArray(ImageFormat.Png));
-
             // Send to WhoGoesThere via WebSocket
 
-
+            AsyncHelpers.RunSync(() => SendImagesAsync(frame));
 
             return frame;
+        }
+
+        private async System.Threading.Tasks.Task SendImagesAsync(Bitmap frame)
+        {
+            Uri serverUri = new Uri("ws://localhost:49889/");
+
+            if (_whoGoesSocket.State != WebSocketState.Open)
+            {
+                await _whoGoesSocket.ConnectAsync(serverUri, CancellationToken.None);
+            }
+
+            ArraySegment<byte> bytesToSend = new ArraySegment<byte>(frame.ToByteArray(ImageFormat.Png));
+
+            await _whoGoesSocket.SendAsync(bytesToSend, WebSocketMessageType.Binary, true, CancellationToken.None);
         }
 
         public string Configuration
@@ -48,11 +58,11 @@ namespace FriendOrFoe.Plugins.iSpy
 
         private void InitConfig()
         {
-            //if (_config != "")
-            //{
-            //    string[] cfg = _config.Split('|');
-            //    LineWidth = Convert.ToInt32(cfg[0]);
-            //}
+            if (_config != "")
+            {
+                string[] cfg = _config.Split('|');
+                EndPoint = cfg[0];
+            }
         }
 
         public string Configure()
@@ -62,11 +72,12 @@ namespace FriendOrFoe.Plugins.iSpy
 
                 if (cfg.ShowDialog() == DialogResult.OK)
                 {
-                    //_config = LineWidth.ToString();
+                    _config = EndPoint;
 
                     InitConfig();
                 }
             }
+
             return Configuration;
         }
 
@@ -84,6 +95,10 @@ namespace FriendOrFoe.Plugins.iSpy
                 if (disposing)
                 {
                     // Free other state (managed objects).
+                    if (_whoGoesSocket != null && _whoGoesSocket.State == WebSocketState.Open)
+                    {
+                        AsyncHelpers.RunSync(() => _whoGoesSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "iSpy Plugin Shutting down.", CancellationToken.None);
+                    }
                 }
                 // Free your own state (unmanaged objects).
                 // Set large fields to null.

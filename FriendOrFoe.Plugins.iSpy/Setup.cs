@@ -19,6 +19,18 @@ namespace FriendOrFoe.Plugins.iSpy
             InitializeComponent();
             _owner = owner;
         }
-          
+
+        private void butSave_Click(object sender, EventArgs e)
+        {
+            _owner.EndPoint = txtEndPointAddress.Text;
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void butCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
     }
 }
