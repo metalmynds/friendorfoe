@@ -97,7 +97,7 @@ namespace FriendOrFoe.Plugins.iSpy
                     // Free other state (managed objects).
                     if (_whoGoesSocket != null && _whoGoesSocket.State == WebSocketState.Open)
                     {
-                        AsyncHelpers.RunSync(() => _whoGoesSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "iSpy Plugin Shutting down.", CancellationToken.None);
+                        AsyncHelpers.RunSync(() => _whoGoesSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "iSpy Plugin Shutting down.", CancellationToken.None));
                     }
                 }
                 // Free your own state (unmanaged objects).
